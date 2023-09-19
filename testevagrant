@@ -1,0 +1,34 @@
+
+Vagrant.configure("2") do |config|
+
+  config.vm.define "server1" do|server1|
+    config.vm.box = "gusztavvargadr/ubuntu-server"
+    server1.vm.network "private_network", ip: "192.168.50.10", gateway: "192.168.50.12"
+    config.vm.provision "shell", inline: <<-SHELL
+      sudo apt update
+      sudo apt install -y apache2
+    SHELL
+    config.vm.synced_folder "/var/www/html", "/var/www/html"
+    VBoxManage modifyvm "server1" --nic-xTM intnet
+  end
+  config.vm.define "server2" do|server2|
+    config.vm.box = "gusztavvargadr/ubuntu-server"
+    config.vm.network "private_network", ip: "192.168.50.11", gateway: "192.168.50.12"
+    config.vm.provision "shell", inline: <<-SHELL
+      sudo apt install -y mysql
+    SHELL
+  VBoxManage modifyvm "server2" --nic-xTM intnet
+  end
+
+  config.vm.define "server3" do|server3|
+    config.vm.box = "gusztavvargadr/ubuntu-server"
+    config.vm.network "private_network", ip: "192.168.50.12"
+    config.vm.network "public_network", type: "dhcp"
+  end
+
+end
+
+
+
+
+
