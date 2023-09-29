@@ -105,6 +105,9 @@ Vagrant.configure("2") do |config|
    
    faz o roteamento entre diferentes placa de rede
 
+   enp0s3
+   É a configuração da placa de rede
+
     
    
    end
