@@ -100,4 +100,11 @@ Vagrant.configure("2") do |config|
    Configura uma rede pública usando DHCP e a interface de rede "wlp3s0".
    
    Realiza o provisionamento da máquina virtual "server3" instalando algumas ferramentas e realizando algumas configurações.
+
+    sudo sysctl -w net.ipv4.ip_forward=1
+   
+   faz o roteamento entre diferentes placa de rede
+
+    
+   
    end
